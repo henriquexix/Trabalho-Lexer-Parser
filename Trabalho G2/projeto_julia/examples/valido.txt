@@ -1,0 +1,11 @@
+x = 10
+
+println("Olá")
+
+if x > 5
+println("Maior que cinco")
+end
+
+for i in 1:5
+println("Teste")
+end

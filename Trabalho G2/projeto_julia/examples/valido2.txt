@@ -1,0 +1,7 @@
+x = 20
+
+println("Teste 2")
+
+if x > 10
+println("Maior que dez")
+end

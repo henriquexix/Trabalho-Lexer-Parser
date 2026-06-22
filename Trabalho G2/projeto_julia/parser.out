@@ -1,0 +1,290 @@
+Grammar:
+
+Rule 0     S' -> programa
+Rule 1     programa -> comandos
+Rule 2     comandos -> comando
+Rule 3     comandos -> comandos comando
+Rule 4     comando -> FOR ID IN NUMBER : NUMBER comandos END
+Rule 5     comando -> IF ID GT NUMBER comandos END
+Rule 6     comando -> PRINTLN ( STRING )
+Rule 7     comando -> ID = NUMBER
+
+Unused terminals:
+
+    LT
+    EQ
+
+Terminals, with rules where they appear:
+
+(                    : 6
+)                    : 6
+:                    : 4
+=                    : 7
+END                  : 4 5
+EQ                   : 
+FOR                  : 4
+GT                   : 5
+ID                   : 4 5 7
+IF                   : 5
+IN                   : 4
+LT                   : 
+NUMBER               : 4 4 5 7
+PRINTLN              : 6
+STRING               : 6
+error                : 
+
+Nonterminals, with rules where they appear:
+
+comando              : 2 3
+comandos             : 1 3 4 5
+programa             : 0
+
+
+state 0
+
+    (0) S' -> . programa
+    (1) programa -> . comandos
+    (2) comandos -> . comando
+    (3) comandos -> . comandos comando
+    (4) comando -> . FOR ID IN NUMBER : NUMBER comandos END
+    (5) comando -> . IF ID GT NUMBER comandos END
+    (6) comando -> . PRINTLN ( STRING )
+    (7) comando -> . ID = NUMBER
+    FOR             shift and go to state 4
+    IF              shift and go to state 6
+    PRINTLN         shift and go to state 7
+    ID              shift and go to state 5
+
+    programa                       shift and go to state 1
+    comandos                       shift and go to state 2
+    comando                        shift and go to state 3
+
+state 1
+
+    (0) S' -> programa .
+
+
+state 2
+
+    (1) programa -> comandos .
+    (3) comandos -> comandos . comando
+    (4) comando -> . FOR ID IN NUMBER : NUMBER comandos END
+    (5) comando -> . IF ID GT NUMBER comandos END
+    (6) comando -> . PRINTLN ( STRING )
+    (7) comando -> . ID = NUMBER
+    $end            reduce using rule 1 (programa -> comandos .)
+    FOR             shift and go to state 4
+    IF              shift and go to state 6
+    PRINTLN         shift and go to state 7
+    ID              shift and go to state 5
+
+    comando                        shift and go to state 8
+
+state 3
+
+    (2) comandos -> comando .
+    FOR             reduce using rule 2 (comandos -> comando .)
+    IF              reduce using rule 2 (comandos -> comando .)
+    PRINTLN         reduce using rule 2 (comandos -> comando .)
+    ID              reduce using rule 2 (comandos -> comando .)
+    $end            reduce using rule 2 (comandos -> comando .)
+    END             reduce using rule 2 (comandos -> comando .)
+
+
+state 4
+
+    (4) comando -> FOR . ID IN NUMBER : NUMBER comandos END
+    ID              shift and go to state 9
+
+
+state 5
+
+    (7) comando -> ID . = NUMBER
+    =               shift and go to state 10
+
+
+state 6
+
+    (5) comando -> IF . ID GT NUMBER comandos END
+    ID              shift and go to state 11
+
+
+state 7
+
+    (6) comando -> PRINTLN . ( STRING )
+    (               shift and go to state 12
+
+
+state 8
+
+    (3) comandos -> comandos comando .
+    FOR             reduce using rule 3 (comandos -> comandos comando .)
+    IF              reduce using rule 3 (comandos -> comandos comando .)
+    PRINTLN         reduce using rule 3 (comandos -> comandos comando .)
+    ID              reduce using rule 3 (comandos -> comandos comando .)
+    $end            reduce using rule 3 (comandos -> comandos comando .)
+    END             reduce using rule 3 (comandos -> comandos comando .)
+
+
+state 9
+
+    (4) comando -> FOR ID . IN NUMBER : NUMBER comandos END
+    IN              shift and go to state 13
+
+
+state 10
+
+    (7) comando -> ID = . NUMBER
+    NUMBER          shift and go to state 14
+
+
+state 11
+
+    (5) comando -> IF ID . GT NUMBER comandos END
+    GT              shift and go to state 15
+
+
+state 12
+
+    (6) comando -> PRINTLN ( . STRING )
+    STRING          shift and go to state 16
+
+
+state 13
+
+    (4) comando -> FOR ID IN . NUMBER : NUMBER comandos END
+    NUMBER          shift and go to state 17
+
+
+state 14
+
+    (7) comando -> ID = NUMBER .
+    FOR             reduce using rule 7 (comando -> ID = NUMBER .)
+    IF              reduce using rule 7 (comando -> ID = NUMBER .)
+    PRINTLN         reduce using rule 7 (comando -> ID = NUMBER .)
+    ID              reduce using rule 7 (comando -> ID = NUMBER .)
+    $end            reduce using rule 7 (comando -> ID = NUMBER .)
+    END             reduce using rule 7 (comando -> ID = NUMBER .)
+
+
+state 15
+
+    (5) comando -> IF ID GT . NUMBER comandos END
+    NUMBER          shift and go to state 18
+
+
+state 16
+
+    (6) comando -> PRINTLN ( STRING . )
+    )               shift and go to state 19
+
+
+state 17
+
+    (4) comando -> FOR ID IN NUMBER . : NUMBER comandos END
+    :               shift and go to state 20
+
+
+state 18
+
+    (5) comando -> IF ID GT NUMBER . comandos END
+    (2) comandos -> . comando
+    (3) comandos -> . comandos comando
+    (4) comando -> . FOR ID IN NUMBER : NUMBER comandos END
+    (5) comando -> . IF ID GT NUMBER comandos END
+    (6) comando -> . PRINTLN ( STRING )
+    (7) comando -> . ID = NUMBER
+    FOR             shift and go to state 4
+    IF              shift and go to state 6
+    PRINTLN         shift and go to state 7
+    ID              shift and go to state 5
+
+    comandos                       shift and go to state 21
+    comando                        shift and go to state 3
+
+state 19
+
+    (6) comando -> PRINTLN ( STRING ) .
+    FOR             reduce using rule 6 (comando -> PRINTLN ( STRING ) .)
+    IF              reduce using rule 6 (comando -> PRINTLN ( STRING ) .)
+    PRINTLN         reduce using rule 6 (comando -> PRINTLN ( STRING ) .)
+    ID              reduce using rule 6 (comando -> PRINTLN ( STRING ) .)
+    $end            reduce using rule 6 (comando -> PRINTLN ( STRING ) .)
+    END             reduce using rule 6 (comando -> PRINTLN ( STRING ) .)
+
+
+state 20
+
+    (4) comando -> FOR ID IN NUMBER : . NUMBER comandos END
+    NUMBER          shift and go to state 22
+
+
+state 21
+
+    (5) comando -> IF ID GT NUMBER comandos . END
+    (3) comandos -> comandos . comando
+    (4) comando -> . FOR ID IN NUMBER : NUMBER comandos END
+    (5) comando -> . IF ID GT NUMBER comandos END
+    (6) comando -> . PRINTLN ( STRING )
+    (7) comando -> . ID = NUMBER
+    END             shift and go to state 23
+    FOR             shift and go to state 4
+    IF              shift and go to state 6
+    PRINTLN         shift and go to state 7
+    ID              shift and go to state 5
+
+    comando                        shift and go to state 8
+
+state 22
+
+    (4) comando -> FOR ID IN NUMBER : NUMBER . comandos END
+    (2) comandos -> . comando
+    (3) comandos -> . comandos comando
+    (4) comando -> . FOR ID IN NUMBER : NUMBER comandos END
+    (5) comando -> . IF ID GT NUMBER comandos END
+    (6) comando -> . PRINTLN ( STRING )
+    (7) comando -> . ID = NUMBER
+    FOR             shift and go to state 4
+    IF              shift and go to state 6
+    PRINTLN         shift and go to state 7
+    ID              shift and go to state 5
+
+    comandos                       shift and go to state 24
+    comando                        shift and go to state 3
+
+state 23
+
+    (5) comando -> IF ID GT NUMBER comandos END .
+    FOR             reduce using rule 5 (comando -> IF ID GT NUMBER comandos END .)
+    IF              reduce using rule 5 (comando -> IF ID GT NUMBER comandos END .)
+    PRINTLN         reduce using rule 5 (comando -> IF ID GT NUMBER comandos END .)
+    ID              reduce using rule 5 (comando -> IF ID GT NUMBER comandos END .)
+    $end            reduce using rule 5 (comando -> IF ID GT NUMBER comandos END .)
+    END             reduce using rule 5 (comando -> IF ID GT NUMBER comandos END .)
+
+
+state 24
+
+    (4) comando -> FOR ID IN NUMBER : NUMBER comandos . END
+    (3) comandos -> comandos . comando
+    (4) comando -> . FOR ID IN NUMBER : NUMBER comandos END
+    (5) comando -> . IF ID GT NUMBER comandos END
+    (6) comando -> . PRINTLN ( STRING )
+    (7) comando -> . ID = NUMBER
+    END             shift and go to state 25
+    FOR             shift and go to state 4
+    IF              shift and go to state 6
+    PRINTLN         shift and go to state 7
+    ID              shift and go to state 5
+
+    comando                        shift and go to state 8
+
+state 25
+
+    (4) comando -> FOR ID IN NUMBER : NUMBER comandos END .
+    FOR             reduce using rule 4 (comando -> FOR ID IN NUMBER : NUMBER comandos END .)
+    IF              reduce using rule 4 (comando -> FOR ID IN NUMBER : NUMBER comandos END .)
+    PRINTLN         reduce using rule 4 (comando -> FOR ID IN NUMBER : NUMBER comandos END .)
+    ID              reduce using rule 4 (comando -> FOR ID IN NUMBER : NUMBER comandos END .)
+    $end            reduce using rule 4 (comando -> FOR ID IN NUMBER : NUMBER comandos END .)
+    END             reduce using rule 4 (comando -> FOR ID IN NUMBER : NUMBER comandos END .)
