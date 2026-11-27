@@ -1,4 +1,4 @@
-Projeto desenvolvido em Python utilizando a biblioteca SLY. Baseado na Linguagem Julia.
+Baseado no código-fonte Julia, tem como objetivo identificar seus elementos, verificar se a estrutura está de acordo com as regras gramaticais implementadas e apresentar mensagens de reconhecimento de comandos ou de erros.
 
 Funcionalidades implementadas
 - Atribuição
